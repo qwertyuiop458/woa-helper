@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор анатомических исследований эпохи Возрождения</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-microscope"></i>
+                    <h1>Renaissance Anatomy Generator</h1>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active">Главная</a>
+                    <a href="#generator" class="nav-link">Генератор</a>
+                    <a href="#gallery" class="nav-link">Галерея</a>
+                    <a href="#about" class="nav-link">О проекте</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Генератор анатомических исследований эпохи Возрождения</h1>
+                    <p class="hero-subtitle">Создавайте изображения в стиле Леонардо да Винчи и Андреаса Везалия с помощью современных технологий</p>
+                    <div class="hero-buttons">
+                        <a href="#generator" class="btn btn-primary">
+                            <i class="fas fa-magic"></i>
+                            Создать изображение
+                        </a>
+                        <a href="#gallery" class="btn btn-secondary">
+                            <i class="fas fa-images"></i>
+                            Посмотреть галерею
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="anatomy-preview">
+                        <div class="preview-figure">
+                            <div class="head"></div>
+                            <div class="torso"></div>
+                            <div class="arms"></div>
+                            <div class="legs"></div>
+                            <div class="organs">
+                                <div class="heart"></div>
+                                <div class="lungs"></div>
+                                <div class="liver"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Generator Section -->
+    <section id="generator" class="generator">
+        <div class="container">
+            <div class="section-header">
+                <h2>Генератор изображений</h2>
+                <p>Выберите тип генератора и создайте уникальное анатомическое исследование</p>
+            </div>
+            
+            <div class="generator-options">
+                <div class="option-card" data-type="basic">
+                    <div class="card-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Базовый генератор</h3>
+                    <p>Классическая анатомическая фигура с основными органами в стиле эпохи Возрождения</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Анатомическая фигура</li>
+                        <li><i class="fas fa-check"></i> Основные органы</li>
+                        <li><i class="fas fa-check"></i> Латинские надписи</li>
+                        <li><i class="fas fa-check"></i> Эффекты старения</li>
+                    </ul>
+                    <button class="btn btn-primary generate-btn" data-type="basic">
+                        <i class="fas fa-magic"></i>
+                        Создать базовое изображение
+                    </button>
+                </div>
+
+                <div class="option-card active" data-type="advanced">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Продвинутый генератор</h3>
+                    <p>Детализированная анатомия с кровеносной системой и научными обозначениями</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Детализированная фигура</li>
+                        <li><i class="fas fa-check"></i> Кровеносная система</li>
+                        <li><i class="fas fa-check"></i> Все внутренние органы</li>
+                        <li><i class="fas fa-check"></i> Научные обозначения</li>
+                    </ul>
+                    <button class="btn btn-primary generate-btn" data-type="advanced">
+                        <i class="fas fa-magic"></i>
+                        Создать продвинутое изображение
+                    </button>
+                </div>
+            </div>
+
+            <div class="generation-status" id="generationStatus" style="display: none;">
+                <div class="status-content">
+                    <div class="spinner"></div>
+                    <h3>Создание изображения...</h3>
+                    <p>Пожалуйста, подождите. Генератор создает уникальное анатомическое исследование в стиле эпохи Возрождения.</p>
+                </div>
+            </div>
+
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="result-content">
+                    <h3>Ваше изображение готово!</h3>
+                    <div class="image-container">
+                        <img id="generatedImage" src="" alt="Сгенерированное анатомическое изображение">
+                    </div>
+                    <div class="image-actions">
+                        <button class="btn btn-primary" id="downloadBtn">
+                            <i class="fas fa-download"></i>
+                            Скачать изображение
+                        </button>
+                        <button class="btn btn-secondary" id="shareBtn">
+                            <i class="fas fa-share"></i>
+                            Поделиться
+                        </button>
+                        <button class="btn btn-outline" id="newImageBtn">
+                            <i class="fas fa-plus"></i>
+                            Создать новое
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>Галерея работ</h2>
+                <p>Примеры изображений, созданных нашим генератором</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="item-image">
+                        <img src="renaissance_anatomy_study.png" alt="Базовое анатомическое исследование">
+                    </div>
+                    <div class="item-info">
+                        <h4>Базовое исследование</h4>
+                        <p>Классическая анатомическая фигура с основными органами</p>
+                        <div class="item-tags">
+                            <span class="tag">Базовый</span>
+                            <span class="tag">Классический</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="item-image">
+                        <img src="advanced_renaissance_anatomy.png" alt="Продвинутое анатомическое исследование">
+                    </div>
+                    <div class="item-info">
+                        <h4>Продвинутое исследование</h4>
+                        <p>Детализированная анатомия с кровеносной системой</p>
+                        <div class="item-tags">
+                            <span class="tag">Продвинутый</span>
+                            <span class="tag">Детализированный</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item placeholder">
+                    <div class="placeholder-content">
+                        <i class="fas fa-plus"></i>
+                        <h4>Создайте свое изображение</h4>
+                        <p>Используйте генератор выше для создания уникального анатомического исследования</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>О проекте</h2>
+                <p>Узнайте больше о нашем генераторе и его исторических корнях</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Исторический контекст</h3>
+                    <p>Наш генератор вдохновлен работами великих анатомов эпохи Возрождения:</p>
+                    <ul>
+                        <li><strong>Леонардо да Винчи</strong> (1452-1519) - Анатомические зарисовки</li>
+                        <li><strong>Андреас Везалий</strong> (1514-1564) - "De humani corporis fabrica"</li>
+                        <li><strong>Другие анатомы эпохи Возрождения</strong></li>
+                    </ul>
+                    
+                    <h3>Особенности генератора</h3>
+                    <div class="features-grid">
+                        <div class="feature">
+                            <i class="fas fa-palette"></i>
+                            <h4>Стиль эпохи Возрождения</h4>
+                            <p>Латинские надписи, декоративные элементы, эффекты старения</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-heartbeat"></i>
+                            <h4>Анатомическая точность</h4>
+                            <p>Детализированные органы с научными обозначениями</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-magic"></i>
+                            <h4>Уникальность</h4>
+                            <p>Каждое изображение создается уникально с случайными элементами</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-download"></i>
+                            <h4>Простота использования</h4>
+                            <p>Один клик для создания профессионального изображения</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Renaissance Anatomy Generator</h3>
+                    <p>Создавайте уникальные анатомические исследования в стиле эпохи Возрождения</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Быстрые ссылки</h4>
+                    <ul>
+                        <li><a href="#generator">Генератор</a></li>
+                        <li><a href="#gallery">Галерея</a></li>
+                        <li><a href="#about">О проекте</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Технологии</h4>
+                    <ul>
+                        <li>Python</li>
+                        <li>PIL (Pillow)</li>
+                        <li>HTML5 & CSS3</li>
+                        <li>JavaScript</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Renaissance Anatomy Generator. Создано в образовательных целях.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
