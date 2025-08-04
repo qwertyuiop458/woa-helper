@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор анатомических исследований эпохи Возрождения</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #8B0000;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .generator-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .generator-section h2 {
+            text-align: center;
+            color: #2F2F2F;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .generator-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .option-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            border-color: #8B0000;
+            box-shadow: 0 15px 30px rgba(139, 0, 0, 0.2);
+        }
+
+        .option-card h3 {
+            color: #8B0000;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .option-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #8B0000, #DC143C);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139, 0, 0, 0.3);
+        }
+
+        .result-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .result-section h3 {
+            color: #2F2F2F;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .image-container {
+            margin: 30px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-section h2 {
+            text-align: center;
+            color: #2F2F2F;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .gallery-item-info {
+            padding: 20px;
+        }
+
+        .gallery-item-info h4 {
+            color: #2F2F2F;
+            margin-bottom: 10px;
+        }
+
+        .gallery-item-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .generator-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎨 Генератор анатомических исследований эпохи Возрождения</h1>
+            <p>Создавайте изображения в стиле Леонардо да Винчи и Андреаса Везалия</p>
+        </div>
+
+        <!-- Generator Section -->
+        <div class="generator-section">
+            <h2>Генератор изображений</h2>
+            <div class="generator-options">
+                <div class="option-card" onclick="generateImage('basic')">
+                    <h3>🩺 Базовый генератор</h3>
+                    <p>Классическая анатомическая фигура с основными органами в стиле эпохи Возрождения</p>
+                    <button class="btn">Создать базовое изображение</button>
+                </div>
+
+                <div class="option-card" onclick="generateImage('advanced')">
+                    <h3>🧠 Продвинутый генератор</h3>
+                    <p>Детализированная анатомия с кровеносной системой и научными обозначениями</p>
+                    <button class="btn">Создать продвинутое изображение</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div class="result-section" id="resultSection">
+            <h3>Ваше изображение готово!</h3>
+            <div class="image-container">
+                <img id="generatedImage" src="" alt="Сгенерированное анатомическое изображение">
+            </div>
+            <button class="btn" onclick="downloadImage()">📥 Скачать изображение</button>
+            <button class="btn" onclick="hideResult()" style="background: #666; margin-left: 10px;">🔄 Создать новое</button>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="gallery-section">
+            <h2>Галерея работ</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="renaissance_anatomy_study.png" alt="Базовое анатомическое исследование">
+                    <div class="gallery-item-info">
+                        <h4>Базовое исследование</h4>
+                        <p>Классическая анатомическая фигура с основными органами</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="advanced_renaissance_anatomy.png" alt="Продвинутое анатомическое исследование">
+                    <div class="gallery-item-info">
+                        <h4>Продвинутое исследование</h4>
+                        <p>Детализированная анатомия с кровеносной системой</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Renaissance Anatomy Generator</strong></p>
+            <p>Создавайте уникальные анатомические исследования в стиле эпохи Возрождения</p>
+            <p>Вдохновлено работами Леонардо да Винчи и Андреаса Везалия</p>
+        </div>
+    </div>
+
+    <script>
+        function generateImage(type) {
+            // Показываем результат
+            const resultSection = document.getElementById('resultSection');
+            const generatedImage = document.getElementById('generatedImage');
+            
+            // Устанавливаем соответствующее изображение
+            if (type === 'basic') {
+                generatedImage.src = 'renaissance_anatomy_study.png';
+            } else {
+                generatedImage.src = 'advanced_renaissance_anatomy.png';
+            }
+            
+            // Показываем секцию результата
+            resultSection.style.display = 'block';
+            
+            // Прокручиваем к результату
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Показываем уведомление
+            showNotification(`Изображение типа "${type === 'basic' ? 'Базовый' : 'Продвинутый'}" создано!`);
+        }
+
+        function downloadImage() {
+            const img = document.getElementById('generatedImage');
+            const link = document.createElement('a');
+            link.href = img.src;
+            link.download = `renaissance_anatomy_${Date.now()}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification('Изображение успешно скачано!');
+        }
+
+        function hideResult() {
+            document.getElementById('resultSection').style.display = 'none';
+        }
+
+        function showNotification(message) {
+            // Создаем уведомление
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                z-index: 10000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Анимируем появление
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Автоматически убираем через 3 секунды
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
