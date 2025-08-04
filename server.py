@@ -28,7 +28,7 @@ class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         # Custom logging format
         print(f"[{self.log_date_time_string()}] {format % args}")
 
-def start_server(port=8080):
+def start_server(port=8081):
     """Запускает веб-сервер на указанном порту"""
     
     # Проверяем, что все необходимые файлы существуют
@@ -135,7 +135,7 @@ def main():
         return
     
     # Запускаем сервер
-    port = 8080
+    port = 8081
     success = start_server(port)
     
     if success:
