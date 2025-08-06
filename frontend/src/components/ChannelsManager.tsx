@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_ENDPOINTS } from '../config';
 
 type ChannelsManagerProps = {
   onChannelSelect: (channel: string | null) => void;
@@ -17,7 +18,7 @@ const ChannelsManager: React.FC<ChannelsManagerProps> = ({ onChannelSelect }) =>
 
   const fetchChannels = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/channels');
+      const response = await fetch(API_ENDPOINTS.CHANNELS);
       const data = await response.json();
       setChannels(data);
       if (data.length > 0 && !activeChannel) {
@@ -46,7 +47,7 @@ const ChannelsManager: React.FC<ChannelsManagerProps> = ({ onChannelSelect }) =>
     if (!channels.includes(username)) {
       setLoading(true);
       try {
-        const response = await fetch('http://localhost:3001/api/channels', {
+        const response = await fetch(API_ENDPOINTS.CHANNELS, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ channel: username }),
@@ -57,7 +58,7 @@ const ChannelsManager: React.FC<ChannelsManagerProps> = ({ onChannelSelect }) =>
           setActiveChannel(username);
           onChannelSelect(username);
           // Автоматично запускаємо парсер після додавання каналу
-          await fetch('http://localhost:3001/api/fetch', { method: 'POST' });
+          await fetch(API_ENDPOINTS.FETCH, { method: 'POST' });
         } else {
           alert(data.error || 'Помилка додавання каналу');
         }
@@ -73,7 +74,7 @@ const ChannelsManager: React.FC<ChannelsManagerProps> = ({ onChannelSelect }) =>
   const removeChannel = async (usernameToRemove: string) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3001/api/channels/${usernameToRemove}`, {
+      const response = await fetch(`${API_ENDPOINTS.CHANNELS}/${usernameToRemove}`, {
         method: 'DELETE',
       });
       const data = await response.json();
@@ -85,7 +86,7 @@ const ChannelsManager: React.FC<ChannelsManagerProps> = ({ onChannelSelect }) =>
           onChannelSelect(nextActive);
         }
         // Автоматично запускаємо парсер після видалення каналу
-        await fetch('http://localhost:3001/api/fetch', { method: 'POST' });
+        await fetch(API_ENDPOINTS.FETCH, { method: 'POST' });
       }
     } catch (error) {
       alert('Помилка видалення каналу');

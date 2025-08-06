@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Map from './components/Map';
 import Filters from './components/Filters';
 import ChannelsManager from './components/ChannelsManager';
+import { API_ENDPOINTS } from './config';
 
 interface Trajectory {
   source: string;
@@ -22,7 +23,7 @@ function App() {
     let interval: NodeJS.Timeout;
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/trajectories');
+        const res = await fetch(API_ENDPOINTS.TRAJECTORIES);
         const json = await res.json();
         setData(json);
       } catch (error) {
