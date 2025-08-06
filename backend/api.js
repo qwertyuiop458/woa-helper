@@ -77,27 +77,31 @@ app.delete('/api/channels/:channel', (req, res) => {
 // POST /api/fetch - запустити парсер
 app.post('/api/fetch', (req, res) => {
   const pythonScript = path.join(__dirname, 'telegram_parser.py');
+  const pythonPath = path.join(__dirname, 'venv', 'bin', 'python3');
   
-  const pythonProcess = spawn('python3', [pythonScript]);
+  const pythonProcess = spawn(pythonPath, [pythonScript]);
   
   let output = '';
   let errorOutput = '';
 
   pythonProcess.stdout.on('data', (data) => {
     output += data.toString();
+    console.log('Python output:', data.toString());
   });
 
   pythonProcess.stderr.on('data', (data) => {
     errorOutput += data.toString();
+    console.error('Python error:', data.toString());
   });
 
   pythonProcess.on('close', (code) => {
     if (code === 0) {
-      res.json({ success: true, message: 'Парсер успішно виконано' });
+      res.json({ success: true, message: 'Парсер успішно виконано', output });
     } else {
       res.status(500).json({ 
         error: 'Помилка парсера', 
-        details: errorOutput || output 
+        details: errorOutput || output,
+        code
       });
     }
   });
@@ -125,6 +129,16 @@ app.get('/api/trajectories', (req, res) => {
   }
 });
 
+// GET /api/health - перевірка стану сервера
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    python: fs.existsSync(path.join(__dirname, 'venv', 'bin', 'python3'))
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`API сервер запущено на порту ${PORT}`);
+  console.log(`Python path: ${path.join(__dirname, 'venv', 'bin', 'python3')}`);
 });
