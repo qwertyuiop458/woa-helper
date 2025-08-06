@@ -17,20 +17,21 @@ function App() {
   const [filters, setFilters] = useState({ type: '', region: '' });
   const [data, setData] = useState<Trajectory[]>([]);
 
-  // Polling для trajectories.json
+  // Polling для trajectories через API
   useEffect(() => {
     let interval: NodeJS.Timeout;
     const fetchData = async () => {
       try {
-        const res = await fetch('/data/trajectories.json');
+        const res = await fetch('http://localhost:3001/api/trajectories');
         const json = await res.json();
         setData(json);
-      } catch {
+      } catch (error) {
+        console.error('Помилка завантаження траєкторій:', error);
         setData([]);
       }
     };
     fetchData();
-    interval = setInterval(fetchData, 30000);
+    interval = setInterval(fetchData, 30000); // кожні 30 секунд
     return () => clearInterval(interval);
   }, []);
 
