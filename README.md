@@ -2,75 +2,60 @@
 
 Повноцінний клон alerts.in.ua з можливістю підключати власні Telegram-канали, фільтрацією та інтерактивною картою.
 
-## Структура проєкту
+## 🚀 Швидкий деплой на Vercel
 
-```
-/workspace/
-├── backend/                # Python парсер + Node.js API
-│   ├── telegram_parser.py  # Парсер Telegram-каналів
-│   ├── api.js             # Node.js API сервер
-│   ├── channels.json      # Список каналів
-│   └── data/
-│       └── trajectories.json
-├── frontend/              # React + TypeScript
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Map.tsx
-│   │   │   ├── Filters.tsx
-│   │   │   └── ChannelsManager.tsx
-│   │   └── App.tsx
-│   └── public/
-└── README.md
+### 1. Створіть акаунт на [vercel.com](https://vercel.com)
+
+### 2. Завантажте код на GitHub:
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/YOUR_USERNAME/alerts-clone.git
+git push -u origin main
 ```
 
-## Встановлення
+### 3. Підключіть до Vercel:
+- Перейдіть на [vercel.com](https://vercel.com)
+- Натисніть "New Project"
+- Підключіть ваш GitHub репозиторій
+- Vercel автоматично збудує і запустить проєкт
 
-### 1. Backend (Python + Node.js)
+### 4. Отримайте URL:
+```
+https://your-project-name.vercel.app
+```
 
+---
+
+## 📱 Використання на телефоні
+
+1. Відкрийте URL на телефоні
+2. Додайте Telegram-канали через вебінтерфейс
+3. Переглядайте траєкторії на карті
+4. Використовуйте фільтри для пошуку
+
+---
+
+## 🏗️ Локальна розробка
+
+### Backend:
 ```bash
 cd backend
 npm install
-pip install -r requirements.txt
+node api.js
 ```
 
-### 2. Frontend (React)
-
+### Frontend:
 ```bash
 cd frontend
 npm install
-```
-
-## Налаштування Telegram API
-
-1. Перейдіть на [my.telegram.org](https://my.telegram.org)
-2. Увійдіть під своїм акаунтом
-3. Виберіть "API development tools"
-4. Отримайте `api_id` та `api_hash`
-5. Відредагуйте `backend/telegram_parser.py`:
-   ```python
-   api_id = 123456  # ← замініть на свій
-   api_hash = 'your_api_hash'  # ← замініть на свій
-   ```
-
-## Запуск
-
-### 1. Backend API (порт 3001)
-
-```bash
-cd backend
-npm start
-```
-
-### 2. Frontend (порт 5173)
-
-```bash
-cd frontend
 npm run dev
 ```
 
-Відкрийте [http://localhost:5173](http://localhost:5173)
+---
 
-## Функціональність
+## 📋 Функціональність
 
 - ✅ Парсинг Telegram-каналів
 - ✅ Інтерактивна карта з траєкторіями
@@ -78,8 +63,11 @@ npm run dev
 - ✅ Фільтрація за типом та регіоном
 - ✅ Автоматичне оновлення даних
 - ✅ API для керування каналами
+- ✅ Деплой на Vercel
 
-## API Endpoints
+---
+
+## 🔧 API Endpoints
 
 - `GET /api/channels` - отримати список каналів
 - `POST /api/channels` - додати канал
@@ -87,23 +75,8 @@ npm run dev
 - `POST /api/fetch` - запустити парсер
 - `GET /api/trajectories` - отримати траєкторії
 
-## Використання
+---
 
-1. Додайте Telegram-канали через вебінтерфейс
-2. Система автоматично запустить парсер
-3. Переглядайте траєкторії на карті
-4. Використовуйте фільтри для пошуку
+## 🌐 Доступ з телефону
 
-## Розробка
-
-### Додавання нових фільтрів
-
-Редагуйте `frontend/src/components/Filters.tsx`
-
-### Зміна логіки парсингу
-
-Редагуйте `backend/telegram_parser.py`
-
-### Додавання нових API endpoints
-
-Редагуйте `backend/api.js`
+Після деплою на Vercel, відкрийте URL на будь-якому пристрої!
