@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новини погоди - Прогноз погоди</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>Прогноз погоди</span>
+                </div>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Розширений прогноз</a>
+                    <a href="current-weather.html" class="nav-link">Поточні умови</a>
+                    <a href="weather-maps.html" class="nav-link">Карти погоди</a>
+                    <a href="news.html" class="nav-link active">Новини</a>
+                </nav>
+                <div class="search-box">
+                    <input type="text" placeholder="Пошук новин..." id="newsSearch">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Featured News -->
+            <section class="featured-news">
+                <div class="featured-article">
+                    <div class="article-image">
+                        <img src="https://via.placeholder.com/800x400/667eea/ffffff?text=Головна+новина" alt="Головна новина">
+                        <div class="article-category">Головна</div>
+                    </div>
+                    <div class="article-content">
+                        <h1>Сильні морози очікуються в Україні наступного тижня</h1>
+                        <p class="article-meta">
+                            <span class="date"><i class="fas fa-calendar"></i> 15 грудня 2024</span>
+                            <span class="author"><i class="fas fa-user"></i> Метеоролог</span>
+                            <span class="views"><i class="fas fa-eye"></i> 1,234</span>
+                        </p>
+                        <p class="article-excerpt">
+                            За прогнозами синоптиків, наступного тижня в Україні очікуються сильні морози. 
+                            Температура може опуститися до -20°C в деяких регіонах. Метеорологи попереджають 
+                            про необхідність підготовки до холодної погоди...
+                        </p>
+                        <a href="#" class="read-more-btn">Читати далі</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- News Categories -->
+            <section class="news-categories">
+                <div class="category-tabs">
+                    <button class="category-btn active" data-category="all">Всі новини</button>
+                    <button class="category-btn" data-category="forecast">Прогнози</button>
+                    <button class="category-btn" data-category="climate">Клімат</button>
+                    <button class="category-btn" data-category="disasters">Стихійні лиха</button>
+                    <button class="category-btn" data-category="science">Наука</button>
+                </div>
+            </section>
+
+            <!-- News Grid -->
+            <section class="news-grid">
+                <div class="news-container" id="newsContainer">
+                    <!-- News articles will be generated here -->
+                </div>
+            </section>
+
+            <!-- Weather Alerts -->
+            <section class="weather-alerts-news">
+                <h2>Актуальні попередження</h2>
+                <div class="alerts-list" id="alertsList">
+                    <!-- Weather alerts will be generated here -->
+                </div>
+            </section>
+
+            <!-- Climate Data -->
+            <section class="climate-data">
+                <h2>Кліматичні дані</h2>
+                <div class="climate-grid">
+                    <div class="climate-card">
+                        <h3><i class="fas fa-thermometer-half"></i> Середня температура</h3>
+                        <div class="climate-value">8.5°C</div>
+                        <p>За останній місяць</p>
+                    </div>
+                    <div class="climate-card">
+                        <h3><i class="fas fa-tint"></i> Опади</h3>
+                        <div class="climate-value">45 мм</div>
+                        <p>За останній місяць</p>
+                    </div>
+                    <div class="climate-card">
+                        <h3><i class="fas fa-sun"></i> Сонячні години</h3>
+                        <div class="climate-value">156 год</div>
+                        <p>За останній місяць</p>
+                    </div>
+                    <div class="climate-card">
+                        <h3><i class="fas fa-wind"></i> Середня швидкість вітру</h3>
+                        <div class="climate-value">4.2 м/с</div>
+                        <p>За останній місяць</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 Прогноз погоди. Всі права захищені.</p>
+                <div class="footer-links">
+                    <a href="#">Про нас</a>
+                    <a href="#">Контакти</a>
+                    <a href="#">Політика конфіденційності</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="news.js"></script>
+</body>
+</html>

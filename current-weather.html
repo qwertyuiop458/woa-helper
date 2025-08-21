@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поточні умови погоди - Прогноз погоди</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>Прогноз погоди</span>
+                </div>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Розширений прогноз</a>
+                    <a href="current-weather.html" class="nav-link active">Поточні умови</a>
+                    <a href="weather-maps.html" class="nav-link">Карти погоди</a>
+                    <a href="news.html" class="nav-link">Новини</a>
+                </nav>
+                <div class="search-box">
+                    <input type="text" placeholder="Пошук міста..." id="citySearch">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Current Weather Details -->
+            <section class="current-weather">
+                <div class="weather-card">
+                    <div class="location-info">
+                        <h1 id="currentCity">Київ</h1>
+                        <p id="currentDate">Сьогодні, 15 грудня 2024</p>
+                        <p id="currentTime">15:30</p>
+                    </div>
+                    <div class="weather-main">
+                        <div class="temperature">
+                            <span id="currentTemp">-2°C</span>
+                        </div>
+                        <div class="weather-icon">
+                            <i id="currentIcon" class="fas fa-snowflake"></i>
+                        </div>
+                        <div class="weather-desc">
+                            <p id="currentDesc">Сніг</p>
+                            <p id="currentFeels">Відчувається як -5°C</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Weather Information -->
+            <section class="detailed-weather">
+                <div class="weather-grid">
+                    <div class="weather-detail-card">
+                        <h3><i class="fas fa-thermometer-half"></i> Температура</h3>
+                        <div class="detail-content">
+                            <div class="detail-row">
+                                <span>Поточна:</span>
+                                <span id="currentTempDetail">-2°C</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Відчувається:</span>
+                                <span id="feelsLikeDetail">-5°C</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Максимум:</span>
+                                <span id="maxTempDetail">1°C</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Мінімум:</span>
+                                <span id="minTempDetail">-8°C</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weather-detail-card">
+                        <h3><i class="fas fa-wind"></i> Вітер</h3>
+                        <div class="detail-content">
+                            <div class="detail-row">
+                                <span>Швидкість:</span>
+                                <span id="windSpeedDetail">5 км/год</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Напрямок:</span>
+                                <span id="windDirectionDetail">Північно-західний</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Пориви:</span>
+                                <span id="windGustsDetail">12 км/год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weather-detail-card">
+                        <h3><i class="fas fa-tint"></i> Вологість</h3>
+                        <div class="detail-content">
+                            <div class="detail-row">
+                                <span>Відносна:</span>
+                                <span id="humidityDetail">85%</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Точка роси:</span>
+                                <span id="dewPointDetail">-4°C</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Випаровування:</span>
+                                <span id="evaporationDetail">0.2 мм/год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weather-detail-card">
+                        <h3><i class="fas fa-compress-arrows-alt"></i> Атмосферний тиск</h3>
+                        <div class="detail-content">
+                            <div class="detail-row">
+                                <span>Поточний:</span>
+                                <span id="pressureDetail">1013 гПа</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Тренд:</span>
+                                <span id="pressureTrendDetail">Стабільний</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Висота:</span>
+                                <span id="altitudeDetail">179 м</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weather-detail-card">
+                        <h3><i class="fas fa-eye"></i> Видимість</h3>
+                        <div class="detail-content">
+                            <div class="detail-row">
+                                <span>Відстань:</span>
+                                <span id="visibilityDetail">10 км</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Хмарність:</span>
+                                <span id="cloudinessDetail">85%</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>УФ індекс:</span>
+                                <span id="uvIndexDetail">1 (Низький)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weather-detail-card">
+                        <h3><i class="fas fa-sun"></i> Сонячна активність</h3>
+                        <div class="detail-content">
+                            <div class="detail-row">
+                                <span>Схід сонця:</span>
+                                <span id="sunriseDetail">07:45</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Захід сонця:</span>
+                                <span id="sunsetDetail">16:15</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Тривалість дня:</span>
+                                <span id="dayLengthDetail">8г 30хв</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Air Quality -->
+            <section class="air-quality">
+                <h2>Якість повітря</h2>
+                <div class="air-quality-card">
+                    <div class="aqi-display">
+                        <div class="aqi-number" id="aqiNumber">45</div>
+                        <div class="aqi-label" id="aqiLabel">Добра</div>
+                    </div>
+                    <div class="aqi-details">
+                        <div class="aqi-item">
+                            <span>PM2.5:</span>
+                            <span id="pm25Detail">12 µg/m³</span>
+                        </div>
+                        <div class="aqi-item">
+                            <span>PM10:</span>
+                            <span id="pm10Detail">25 µg/m³</span>
+                        </div>
+                        <div class="aqi-item">
+                            <span>O₃:</span>
+                            <span id="ozoneDetail">35 µg/m³</span>
+                        </div>
+                        <div class="aqi-item">
+                            <span>NO₂:</span>
+                            <span id="no2Detail">15 µg/m³</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Weather Alerts -->
+            <section class="weather-alerts">
+                <h2>Попередження про погоду</h2>
+                <div class="alerts-container" id="alertsContainer">
+                    <div class="alert-item">
+                        <div class="alert-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>Попередження про ожеледицю</h4>
+                            <p>Очікується ожеледиця вночі. Будьте обережні на дорогах.</p>
+                            <span class="alert-time">Дійсне до: 16 грудня, 06:00</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 Прогноз погоди. Всі права захищені.</p>
+                <div class="footer-links">
+                    <a href="#">Про нас</a>
+                    <a href="#">Контакти</a>
+                    <a href="#">Політика конфіденційності</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="current-weather.js"></script>
+</body>
+</html>

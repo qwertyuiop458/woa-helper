@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоди - Розширений прогноз</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>Прогноз погоди</span>
+                </div>
+                <nav class="nav">
+                    <a href="#" class="nav-link active">Розширений прогноз</a>
+                    <a href="#" class="nav-link">Поточні умови</a>
+                    <a href="#" class="nav-link">Карти погоди</a>
+                    <a href="#" class="nav-link">Новини</a>
+                </nav>
+                <div class="search-box">
+                    <input type="text" placeholder="Пошук міста..." id="citySearch">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Current Weather -->
+            <section class="current-weather">
+                <div class="weather-card">
+                    <div class="location-info">
+                        <h1 id="currentCity">Київ</h1>
+                        <p id="currentDate">Сьогодні, 15 грудня 2024</p>
+                    </div>
+                    <div class="weather-main">
+                        <div class="temperature">
+                            <span id="currentTemp">-2°C</span>
+                        </div>
+                        <div class="weather-icon">
+                            <i id="currentIcon" class="fas fa-snowflake"></i>
+                        </div>
+                        <div class="weather-desc">
+                            <p id="currentDesc">Сніг</p>
+                            <p id="currentFeels">Відчувається як -5°C</p>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <div class="detail-item">
+                            <i class="fas fa-wind"></i>
+                            <span>Вітер: <span id="currentWind">5 км/год</span></span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-tint"></i>
+                            <span>Вологість: <span id="currentHumidity">85%</span></span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-eye"></i>
+                            <span>Видимість: <span id="currentVisibility">10 км</span></span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                            <span>Тиск: <span id="currentPressure">1013 гПа</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Extended Forecast -->
+            <section class="extended-forecast">
+                <h2>Розширений прогноз на 10 днів</h2>
+                <div class="forecast-tabs">
+                    <button class="tab-btn active" data-period="10">10 днів</button>
+                    <button class="tab-btn" data-period="7">7 днів</button>
+                    <button class="tab-btn" data-period="3">3 дні</button>
+                </div>
+                <div class="forecast-container" id="forecastContainer">
+                    <!-- Forecast cards will be generated here -->
+                </div>
+            </section>
+
+            <!-- Hourly Forecast -->
+            <section class="hourly-forecast">
+                <h2>Погодинний прогноз</h2>
+                <div class="hourly-container" id="hourlyContainer">
+                    <!-- Hourly forecast will be generated here -->
+                </div>
+            </section>
+
+            <!-- Weather Maps -->
+            <section class="weather-maps">
+                <h2>Карти погоди</h2>
+                <div class="maps-grid">
+                    <div class="map-card">
+                        <h3>Температура</h3>
+                        <div class="map-placeholder">
+                            <i class="fas fa-map"></i>
+                            <p>Карта температур</p>
+                        </div>
+                    </div>
+                    <div class="map-card">
+                        <h3>Опади</h3>
+                        <div class="map-placeholder">
+                            <i class="fas fa-cloud-rain"></i>
+                            <p>Карта опадів</p>
+                        </div>
+                    </div>
+                    <div class="map-card">
+                        <h3>Вітер</h3>
+                        <div class="map-placeholder">
+                            <i class="fas fa-wind"></i>
+                            <p>Карта вітрів</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 Прогноз погоди. Всі права захищені.</p>
+                <div class="footer-links">
+                    <a href="#">Про нас</a>
+                    <a href="#">Контакти</a>
+                    <a href="#">Політика конфіденційності</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
