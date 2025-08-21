@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоди - Простий варіант</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .weather-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-info h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .weather-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .temperature {
+            font-size: 4rem;
+            font-weight: 300;
+            color: #667eea;
+        }
+
+        .weather-icon {
+            font-size: 4rem;
+            color: #ffd700;
+        }
+
+        .weather-desc {
+            text-align: center;
+        }
+
+        .weather-desc p:first-child {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .weather-desc p:last-child {
+            color: #666;
+        }
+
+        .weather-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+        }
+
+        .detail-item i {
+            color: #667eea;
+            width: 20px;
+        }
+
+        .forecast-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .forecast-section h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .forecast-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: #667eea;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .forecast-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .forecast-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .forecast-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .forecast-date {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .forecast-icon {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .forecast-temp {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .forecast-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .forecast-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            margin: 20px 0;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 10px;
+            width: 200px;
+            font-size: 0.9rem;
+        }
+
+        .search-btn {
+            background: #667eea;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .weather-main {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .temperature {
+                font-size: 3rem;
+            }
+            
+            .weather-icon {
+                font-size: 3rem;
+            }
+            
+            .forecast-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-cloud-sun"></i> Прогноз погоди
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Пошук міста..." id="citySearch">
+                <button class="search-btn" onclick="searchCity()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Current Weather -->
+        <div class="weather-card">
+            <div class="location-info">
+                <h1 id="currentCity">Київ</h1>
+                <p id="currentDate">Сьогодні, 15 грудня 2024</p>
+            </div>
+            <div class="weather-main">
+                <div class="temperature">
+                    <span id="currentTemp">-2°C</span>
+                </div>
+                <div class="weather-icon">
+                    <i id="currentIcon" class="fas fa-snowflake"></i>
+                </div>
+                <div class="weather-desc">
+                    <p id="currentDesc">Сніг</p>
+                    <p id="currentFeels">Відчувається як -5°C</p>
+                </div>
+            </div>
+            <div class="weather-details">
+                <div class="detail-item">
+                    <i class="fas fa-wind"></i>
+                    <span>Вітер: <span id="currentWind">5 км/год</span></span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-tint"></i>
+                    <span>Вологість: <span id="currentHumidity">85%</span></span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-eye"></i>
+                    <span>Видимість: <span id="currentVisibility">10 км</span></span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-compress-arrows-alt"></i>
+                    <span>Тиск: <span id="currentPressure">1013 гПа</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Extended Forecast -->
+        <div class="forecast-section">
+            <h2>Розширений прогноз на 10 днів</h2>
+            <div class="forecast-tabs">
+                <button class="tab-btn active" onclick="switchTab(10)">10 днів</button>
+                <button class="tab-btn" onclick="switchTab(7)">7 днів</button>
+                <button class="tab-btn" onclick="switchTab(3)">3 дні</button>
+            </div>
+            <div class="forecast-container" id="forecastContainer">
+                <!-- Forecast cards will be generated here -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Прогноз погоди. Всі права захищені.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Weather App JavaScript
+        class SimpleWeatherApp {
+            constructor() {
+                this.currentCity = 'Київ';
+                this.forecastData = [];
+                this.currentPeriod = 10;
+                
+                this.init();
+            }
+
+            init() {
+                this.updateCurrentDate();
+                this.loadWeatherData();
+                this.generateForecastCards();
+            }
+
+            updateCurrentDate() {
+                const now = new Date();
+                const options = { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                };
+                const dateString = now.toLocaleDateString('uk-UA', options);
+                document.getElementById('currentDate').textContent = dateString;
+            }
+
+            loadWeatherData() {
+                // Mock data
+                this.forecastData = this.getMockForecastData();
+            }
+
+            getMockForecastData() {
+                const forecast = [];
+                const weatherConditions = [
+                    { desc: 'Сонячно', icon: 'sun', temp: 5 },
+                    { desc: 'Хмарно', icon: 'cloud', temp: 2 },
+                    { desc: 'Дощ', icon: 'cloud-rain', temp: 1 },
+                    { desc: 'Сніг', icon: 'snowflake', temp: -3 },
+                    { desc: 'Туман', icon: 'smog', temp: 0 }
+                ];
+
+                for (let i = 1; i <= 10; i++) {
+                    const date = new Date();
+                    date.setDate(date.getDate() + i);
+                    const condition = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
+                    
+                    forecast.push({
+                        date: date,
+                        day: date.toLocaleDateString('uk-UA', { weekday: 'short' }),
+                        temperature: condition.temp + Math.floor(Math.random() * 10) - 5,
+                        description: condition.desc,
+                        icon: condition.icon,
+                        humidity: 60 + Math.floor(Math.random() * 30),
+                        windSpeed: 3 + Math.floor(Math.random() * 15)
+                    });
+                }
+
+                return forecast;
+            }
+
+            generateForecastCards() {
+                const container = document.getElementById('forecastContainer');
+                container.innerHTML = '';
+
+                this.forecastData.slice(0, this.currentPeriod).forEach(day => {
+                    const card = this.createForecastCard(day);
+                    container.appendChild(card);
+                });
+            }
+
+            createForecastCard(day) {
+                const card = document.createElement('div');
+                card.className = 'forecast-card';
+                
+                card.innerHTML = `
+                    <div class="forecast-date">${day.day}</div>
+                    <div class="forecast-icon">
+                        <i class="fas fa-${day.icon}"></i>
+                    </div>
+                    <div class="forecast-temp">${day.temperature}°C</div>
+                    <div class="forecast-desc">${day.description}</div>
+                    <div class="forecast-details">
+                        <span>Вологість: ${day.humidity}%</span>
+                        <span>Вітер: ${day.windSpeed} км/год</span>
+                    </div>
+                `;
+
+                return card;
+            }
+
+            switchPeriod(period) {
+                this.currentPeriod = period;
+                this.generateForecastCards();
+                
+                // Update active tab
+                const tabs = document.querySelectorAll('.tab-btn');
+                tabs.forEach(tab => tab.classList.remove('active'));
+                event.target.classList.add('active');
+            }
+        }
+
+        // Global functions for HTML onclick
+        function searchCity() {
+            const cityInput = document.getElementById('citySearch');
+            const city = cityInput.value.trim();
+            
+            if (city) {
+                app.currentCity = city;
+                document.getElementById('currentCity').textContent = city;
+                cityInput.value = '';
+                alert(`Прогноз погоди для міста ${city}`);
+            }
+        }
+
+        function switchTab(period) {
+            app.switchPeriod(period);
+        }
+
+        // Initialize the app when DOM is loaded
+        let app;
+        document.addEventListener('DOMContentLoaded', () => {
+            app = new SimpleWeatherApp();
+        });
+    </script>
+</body>
+</html>
