@@ -1,0 +1,39 @@
+public class GloftMASS extends javax.microedition.midlet.MIDlet {
+  public static h a;
+
+  public static GloftMASS a;
+
+  public GloftMASS();
+    Code:
+       0: aload_0
+       1: invokespecial #7                  // Method javax/microedition/midlet/MIDlet."<init>":()V
+       4: aload_0
+       5: putstatic     #5                  // Field a:LGloftMASS;
+       8: aload_0
+       9: invokestatic  #11                 // Method javax/microedition/lcdui/Display.getDisplay:(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display;
+      12: pop
+      13: new           #2                  // class h
+      16: dup
+      17: invokespecial #8                  // Method h."<init>":()V
+      20: putstatic     #6                  // Field a:Lh;
+      23: return
+
+  public void startApp();
+    Code:
+       0: getstatic     #6                  // Field a:Lh;
+       3: invokevirtual #10                 // Method h.aN:()V
+       6: return
+
+  public void pauseApp();
+    Code:
+       0: invokestatic  #9                  // Method h.aM:()V
+       3: return
+
+  public void destroyApp(boolean);
+    Code:
+       0: aconst_null
+       1: putstatic     #6                  // Field a:Lh;
+       4: aload_0
+       5: invokevirtual #12                 // Method javax/microedition/midlet/MIDlet.notifyDestroyed:()V
+       8: return
+}
