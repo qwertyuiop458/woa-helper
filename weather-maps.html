@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карти погоди - Прогноз погоди</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>Прогноз погоди</span>
+                </div>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Розширений прогноз</a>
+                    <a href="current-weather.html" class="nav-link">Поточні умови</a>
+                    <a href="weather-maps.html" class="nav-link active">Карти погоди</a>
+                    <a href="news.html" class="nav-link">Новини</a>
+                </nav>
+                <div class="search-box">
+                    <input type="text" placeholder="Пошук міста..." id="citySearch">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Map Controls -->
+            <section class="map-controls">
+                <div class="control-panel">
+                    <h2>Карти погоди</h2>
+                    <div class="map-type-selector">
+                        <button class="map-type-btn active" data-type="temperature">
+                            <i class="fas fa-thermometer-half"></i>
+                            Температура
+                        </button>
+                        <button class="map-type-btn" data-type="precipitation">
+                            <i class="fas fa-cloud-rain"></i>
+                            Опади
+                        </button>
+                        <button class="map-type-btn" data-type="wind">
+                            <i class="fas fa-wind"></i>
+                            Вітер
+                        </button>
+                        <button class="map-type-btn" data-type="pressure">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                            Тиск
+                        </button>
+                        <button class="map-type-btn" data-type="humidity">
+                            <i class="fas fa-tint"></i>
+                            Вологість
+                        </button>
+                        <button class="map-type-btn" data-type="clouds">
+                            <i class="fas fa-cloud"></i>
+                            Хмарність
+                        </button>
+                    </div>
+                    <div class="time-selector">
+                        <label for="timeSelect">Час:</label>
+                        <select id="timeSelect">
+                            <option value="current">Поточний час</option>
+                            <option value="3h">+3 години</option>
+                            <option value="6h">+6 годин</option>
+                            <option value="12h">+12 годин</option>
+                            <option value="24h">+24 години</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Map -->
+            <section class="map-section">
+                <div class="map-container">
+                    <div id="weatherMap"></div>
+                    <div class="map-overlay">
+                        <div class="map-legend">
+                            <h4>Легенда</h4>
+                            <div class="legend-content" id="legendContent">
+                                <!-- Legend will be generated dynamically -->
+                            </div>
+                        </div>
+                        <div class="map-info">
+                            <div class="info-card">
+                                <h4>Інформація про точку</h4>
+                                <div id="mapInfoContent">
+                                    <p>Клікніть на карту для отримання інформації</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Weather Stations -->
+            <section class="weather-stations">
+                <h2>Метеостанції</h2>
+                <div class="stations-grid" id="stationsGrid">
+                    <!-- Weather stations will be generated here -->
+                </div>
+            </section>
+
+            <!-- Satellite Images -->
+            <section class="satellite-images">
+                <h2>Супутникові зображення</h2>
+                <div class="satellite-controls">
+                    <button class="satellite-btn active" data-type="visible">Видимий спектр</button>
+                    <button class="satellite-btn" data-type="infrared">Інфрачервоний</button>
+                    <button class="satellite-btn" data-type="water-vapor">Водяна пара</button>
+                </div>
+                <div class="satellite-container">
+                    <div class="satellite-image" id="satelliteImage">
+                        <div class="satellite-placeholder">
+                            <i class="fas fa-satellite"></i>
+                            <p>Супутникове зображення</p>
+                            <span>Оновлюється кожні 15 хвилин</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Radar -->
+            <section class="radar-section">
+                <h2>Радар опадів</h2>
+                <div class="radar-container">
+                    <div class="radar-image" id="radarImage">
+                        <div class="radar-placeholder">
+                            <i class="fas fa-radar"></i>
+                            <p>Радар опадів</p>
+                            <span>Оновлюється кожні 5 хвилин</span>
+                        </div>
+                    </div>
+                    <div class="radar-controls">
+                        <button class="radar-btn" data-time="current">Поточний час</button>
+                        <button class="radar-btn" data-time="-1h">-1 година</button>
+                        <button class="radar-btn" data-time="-3h">-3 години</button>
+                        <button class="radar-btn" data-time="-6h">-6 годин</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 Прогноз погоди. Всі права захищені.</p>
+                <div class="footer-links">
+                    <a href="#">Про нас</a>
+                    <a href="#">Контакти</a>
+                    <a href="#">Політика конфіденційності</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="weather-maps.js"></script>
+</body>
+</html>
