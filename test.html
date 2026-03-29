@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тест - Анатомические изображения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #8B0000;
+            text-align: center;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        .button {
+            background: #8B0000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .button:hover {
+            background: #DC143C;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Генератор анатомических исследований эпохи Возрождения</h1>
+        
+        <p>Это тестовая страница. Если вы видите изображения ниже, значит все работает!</p>
+        
+        <div class="image">
+            <h3>Базовое анатомическое исследование</h3>
+            <img src="renaissance_anatomy_study.png" alt="Базовое исследование">
+            <br>
+            <button class="button" onclick="downloadImage('renaissance_anatomy_study.png')">Скачать базовое изображение</button>
+        </div>
+        
+        <div class="image">
+            <h3>Продвинутое анатомическое исследование</h3>
+            <img src="advanced_renaissance_anatomy.png" alt="Продвинутое исследование">
+            <br>
+            <button class="button" onclick="downloadImage('advanced_renaissance_anatomy.png')">Скачать продвинутое изображение</button>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <p><strong>Если изображения не отображаются, проверьте:</strong></p>
+            <ul style="text-align: left; display: inline-block;">
+                <li>Файлы PNG находятся в той же папке, что и HTML</li>
+                <li>Браузер поддерживает отображение изображений</li>
+                <li>Нет ошибок в консоли браузера (F12)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function downloadImage(filename) {
+            const link = document.createElement('a');
+            link.href = filename;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            alert('Скачивание началось!');
+        }
+        
+        // Проверяем загрузку изображений
+        window.onload = function() {
+            const images = document.querySelectorAll('img');
+            images.forEach((img, index) => {
+                img.onload = function() {
+                    console.log(`Изображение ${index + 1} загружено успешно`);
+                };
+                img.onerror = function() {
+                    console.error(`Ошибка загрузки изображения ${index + 1}`);
+                    this.style.border = '2px solid red';
+                    this.alt = 'Ошибка загрузки изображения';
+                };
+            });
+        };
+    </script>
+</body>
+</html>
